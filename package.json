@@ -23,7 +23,7 @@
     "Nicolas Macherey <nicolas.macherey@gmail.com>"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.json",
+    "build": "node_modules/.bin/rimraf dist && tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest --runInBand --verbose ./test",
