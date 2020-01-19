@@ -30,7 +30,7 @@ aliases:
     command: yarn test:e2e
 
 run-template: &run-template
-  working_directory: ~/getbigger.api
+  working_directory: ~/oauth2-server
   docker:
   - image: circleci/node:12
 
@@ -39,6 +39,9 @@ jobs:
     <<: *run-template
     steps:
     - checkout
+    - *restore-cache
+    - *install-deps
+    - *save-cache
     - *build
 
   unit_tests:
@@ -51,7 +54,7 @@ jobs:
     - *run-unit-tests
 
   integration_tests:
-    working_directory: ~/getbigger.api
+    working_directory: ~/oauth2-server
     docker:
     - image: circleci/node:12
     - image: circleci/postgres:9.6.2-alpine
