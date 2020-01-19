@@ -1,0 +1,27 @@
+version: '3.4'
+
+################################################
+# SERVICES
+################################################
+services:
+  postgres:
+    image: postgres:11
+    user: "root"
+    environment:
+      POSTGRES_DB: oauth2-server
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+    - "5432:5432"
+    networks:
+      switchit:
+        aliases:
+        - postgres.switchit.local
+
+################################################
+# NETWORKS
+################################################
+networks:
+  switchit:
+    driver: overlay
+    attachable: true

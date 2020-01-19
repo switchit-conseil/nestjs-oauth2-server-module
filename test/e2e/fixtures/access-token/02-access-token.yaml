@@ -1,0 +1,34 @@
+entity: AccessTokenEntity
+items:
+  access_token_client_1_valid:
+    accessToken: 'ERTYUIOKJHGFDZSXCFGHYJKNBHYUJ'
+    refreshToken: 'TYUIKNBVGSZ345678IUJHGVHJKL'
+    accessTokenExpiresAt: '{{date.recent}}'
+    refreshTokenExpiresAt: '{{date.future}}'
+    client: '@client_1'
+    scope: '["app-1", "app-2"]'
+    createdAt: '{{date.recent}}'
+  access_token_client_1_valid_access_token:
+    accessToken: 'NHGFVBHYTFGHKOOOONBHK'
+    refreshToken: 'IOJHBCDRTYHGFGYUJNBGH'
+    accessTokenExpiresAt: '{{date.future}}'
+    refreshTokenExpiresAt: '{{date.future}}'
+    client: '@client_1'
+    scope: '["app-1", "app-2"]'
+    createdAt: '{{date.recent}}'
+  access_token_client_2_valid:
+    accessToken: 'ERTYUIFGHJKLNBVCDFRTYHJK'
+    refreshToken: 'TYUIOLNBVFTYUJNBVGHYUIL'
+    accessTokenExpiresAt: '{{date.recent}}'
+    refreshTokenExpiresAt: '{{date.future}}'
+    client: '@client_2'
+    scope: '["app-1"]'
+    createdAt: '{{date.recent}}'
+  access_token_client_3_invalid:
+    accessToken: '7789OIGBNSJDQKSJDIKNBHYUIO'
+    refreshToken: 'RTNJSHGQHSJDNJSKDLNAJZKEA'
+    accessTokenExpiresAt: '{{date.past}}'
+    refreshTokenExpiresAt: '{{date.recent}}'
+    client: '@client_3'
+    scope: '["app-3"]'
+    createdAt: '{{date.recent}}'

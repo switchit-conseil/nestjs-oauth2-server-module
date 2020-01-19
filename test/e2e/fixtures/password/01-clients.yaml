@@ -1,0 +1,38 @@
+entity: ClientEntity
+items:
+  client_1:
+    name: 'Client1'
+    clientId: '6ab1cfab-0b3d-418b-8ca2-94d98663fb6f'
+    clientSecret: '6nV9GGm1pu8OY0HDZ3Y7QsVnxtkb60wu'
+    grants: ['password', 'refresh_token']
+    scope: '["app-1", "app-2"]'
+    accessTokenLifetime: 3600
+    refreshTokenLifetime: 7200
+    privateKey: 'privateKey'
+    publicKey: 'publicKey'
+    cert: 'cert'
+    certExpiresAt: '2020-10-10'
+  client_2:
+    name: 'Client2'
+    clientId: 'f9f9f9ef-34b3-428e-a742-669aecd6c889'
+    clientSecret: '4Xg6JgvWfmIT3P5cCev2wehH8sWD3lrd'
+    grants: ['password', 'refresh_token']
+    scope: '["app-1"]'
+    accessTokenLifetime: 3600
+    refreshTokenLifetime: 7200
+    privateKey: 'privateKey'
+    publicKey: 'publicKey'
+    cert: 'cert'
+    certExpiresAt: '2021-10-10'
+  client_3:
+    name: 'Client3'
+    clientId: '051d6291-2ba7-4dd9-8a18-b590b4a9a457'
+    clientSecret: 'YLbvzkTRG40SKMm5DMfoWZD3BRZCV5Dq'
+    grants: ['password', 'refresh_token']
+    scope: '["app-3"]'
+    accessTokenLifetime: 3600
+    refreshTokenLifetime: 7200
+    privateKey: 'privateKey'
+    publicKey: 'publicKey'
+    cert: 'cert'
+    certExpiresAt: '2022-10-10'
