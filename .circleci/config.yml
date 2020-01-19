@@ -36,9 +36,7 @@ run-template: &run-template
 
 jobs:
   build:
-    machine:
-      enabled: true
-    working_directory: ~/getbigger.api
+    <<: *run-template
     steps:
     - checkout
     - *build
