@@ -162,3 +162,8 @@ export class TestSecuredController {
     }
 }
 ```
+
+## Adding the entities to your TypeORM configuration
+
+**IMPORTANT**: The module comes with entities you have to add the configuration `node_modules/@switchit/**/*.entity.js`
+to let typeorm scan your entities or add them to the `entitie` configuration variable in TypeORM.
