@@ -1,89 +1,18 @@
 import * as request from 'supertest';
-import {Controller, Get, INestApplication, Injectable, UseGuards, ValidationPipe} from "@nestjs/common";
-import {Test, TestingModule} from "@nestjs/testing";
-import {AuthGuard} from '@nestjs/passport';
+import {INestApplication, ValidationPipe} from "@nestjs/common";
 import {FixturesLoaderService} from "./fixtures-loader.service";
-import {Oauth2Module} from "../../lib/app/oauth2.module";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {UserLoaderInterface, UserValidatorInterface} from "../../lib/domain/interface";
-import {InvalidUserException, UserInterface} from "../../lib/domain";
+import {Oauth2AsyncUseFactoryModule} from "./modules/oauth2-async-use-factory.module";
+import {Test} from "@nestjs/testing";
 
-@Controller('oauth2-secured')
-export class TestSecuredController {
-    @Get('me')
-    @UseGuards(AuthGuard('access-token'))
-    async auth(): Promise<any> {
-        return {message: 'hello'};
-    }
-}
-
-const users: {[s:string]: string} = {
-    'alice@change.me': 'alice',
-    'bob@change.me': 'bob',
-    'kyle@change.me': 'kyle',
-};
-
-@Injectable()
-export class UserValidator implements UserValidatorInterface {
-    async validate(username, password): Promise<UserInterface> {
-        if (users[username] !== undefined && users[username] === password) {
-            return {
-                id: users[username],
-                username: users[username],
-                email: users[username],
-            }
-        }
-
-        throw InvalidUserException.withUsernameAndPassword(username, password);
-    }
-}
-
-@Injectable()
-export class UserLoader implements UserLoaderInterface {
-    async load(userId: string): Promise<UserInterface> {
-        if (users[userId] !== undefined) {
-            return {
-                id: users[userId],
-                username: users[userId],
-                email: users[userId],
-            }
-        }
-
-        throw InvalidUserException.withId(userId);
-    }
-}
-
-describe('OAuth2 Controller (e2e)', () => {
+describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
     let app: INestApplication;
 
     beforeEach(async () => {
-        const moduleFixture: TestingModule = await Test.createTestingModule({
-            imports: [
-                TypeOrmModule.forRoot({
-                    type: 'postgres',
-                    host: 'localhost',
-                    port: 5432,
-                    username: 'postgres',
-                    password: 'postgres',
-                    database: 'oauth2-server',
-                    entities: [process.cwd() + '/lib/**/*.entity{.ts,.js}'],
-                    dropSchema: true,
-                    synchronize: true
-                }),
-                Oauth2Module.forRoot({
-                    userValidator: new UserValidator(),
-                    userLoader: new UserLoader(),
-                })
-            ],
-            providers: [
-                FixturesLoaderService,
-            ],
-            controllers: [
-                TestSecuredController,
-            ],
+        const module = await Test.createTestingModule({
+            imports: [Oauth2AsyncUseFactoryModule],
         }).compile();
 
-        app = moduleFixture.createNestApplication();
+        app = module.createNestApplication();
         app.useGlobalPipes(new ValidationPipe({
             transform: true,
         }));
