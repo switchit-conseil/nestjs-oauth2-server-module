@@ -145,6 +145,7 @@ export class Oauth2CoreModule implements OnModuleInit {
         return {
             module: Oauth2CoreModule,
             imports: [
+                ...options.imports,
                 CqrsModule,
                 TypeOrmModule.forFeature([
                     ClientEntity,
