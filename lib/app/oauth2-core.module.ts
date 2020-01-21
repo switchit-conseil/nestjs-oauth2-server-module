@@ -127,6 +127,7 @@ export class Oauth2CoreModule implements OnModuleInit {
         const providers: Provider[] = this.createAsyncProviders(options);
 
         const userLoaderProvider = {
+            imports: options.imports,
             provide: 'UserLoaderInterface',
             useFactory: async (options) => {
                 return options.userLoader;
@@ -135,6 +136,7 @@ export class Oauth2CoreModule implements OnModuleInit {
         };
 
         const userValidatorProvider = {
+            imports: options.imports,
             provide: 'UserValidatorInterface',
             useFactory: async (options) => {
                 return options.userValidator;
