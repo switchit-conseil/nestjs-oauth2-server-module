@@ -28,10 +28,14 @@ export class CreateClientHandler implements ICommandHandler<CreateClientCommand>
         const client = new ClientEntity();
         client.name = command.name;
         client.clientId = command.clientId || uuid();
-        client.clientSecret = crypto.randomBytes(32).toString('hex');
+        if (!command.noSecret) {
+            client.clientSecret = crypto.randomBytes(32).toString('hex');
+        }
+
         client.scope = command.scope;
         client.accessTokenLifetime = command.accessTokenLifetime || 3600;
         client.refreshTokenLifetime = command.refreshTokenLifetime || 7200;
+        client.grants = command.grants || ['client_credentials', 'refresh_token'];
 
         // generate keys
         const attrs = [{ name: 'commonName', value: command.name }];

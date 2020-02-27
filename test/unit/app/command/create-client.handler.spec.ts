@@ -80,6 +80,8 @@ describe('Create Client Command Handler', () => {
             'client-1',
             '["app-1", "app-2"]',
             'client-id',
+            ['client_credentials', 'refresh_token'],
+            false,
             1000,
             3600
         ));
@@ -89,6 +91,32 @@ describe('Create Client Command Handler', () => {
             scope: '["app-1", "app-2"]',
             clientId: 'client-id',
             clientSecret: expect.any(String),
+            grants: ['client_credentials', 'refresh_token'],
+            accessTokenLifetime: 1000,
+            refreshTokenLifetime: 3600,
+        }));
+
+        serviceSpy.mockRestore();
+    });
+
+    it('"CreateClientHandler::execute": should create the Client with no secret when asked', async () => {
+        const serviceSpy = jest.spyOn(clientRepositoryMock, 'create');
+
+        await handler.execute(new CreateClientCommand(
+            'client-1',
+            '["app-1", "app-2"]',
+            'client-id',
+            ['password_grant', 'refresh_token'],
+            true,
+            1000,
+            3600
+        ));
+
+        expect(serviceSpy).toBeCalledWith(expect.objectContaining({
+            name: 'client-1',
+            scope: '["app-1", "app-2"]',
+            clientId: 'client-id',
+            grants: ['password_grant', 'refresh_token'],
             accessTokenLifetime: 1000,
             refreshTokenLifetime: 3600,
         }));
