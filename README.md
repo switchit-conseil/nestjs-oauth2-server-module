@@ -171,7 +171,7 @@ to let typeorm scan your entities or add them to the `entitie` configuration var
 ## Using the global validation pipes
 
 **IMPORTANT**: In addition, you should enable the global validation pipe in your NestJS application. In your `main.ts`
-you should add these lines:
+you should use the `useGlobaPipes` with the `ValidationPipe` and the `transform` options set to `true`:
 
 ```typescript
 async function bootstrap() {
