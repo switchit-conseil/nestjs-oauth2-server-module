@@ -167,3 +167,21 @@ export class TestSecuredController {
 
 **IMPORTANT**: The module comes with entities you have to add the configuration `node_modules/@switchit/**/*.entity.js`
 to let typeorm scan your entities or add them to the `entitie` configuration variable in TypeORM.
+
+## Using the global validation pipes
+
+**IMPORTANT**: In addition, you should enable the global validation pipe in your NestJS application. In your `main.ts`
+you should add these lines:
+
+```typescript
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  useContainer(app.select(AppModule), {fallbackOnErrors: true});
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+  }));
+
+  await app.listen(3000);
+}
+bootstrap();
+```
