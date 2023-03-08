@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
-    "@nestjs/core": "^6.0.0",
+    "@nestjs/core": "^9.0.5",
     "@nestjs/cqrs": "^6.0.0",
     "@nestjs/passport": "^6.1.0",
     "@nestjs/swagger": "^3.1.0",
